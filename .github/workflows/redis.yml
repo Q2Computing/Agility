@@ -1,0 +1,24 @@
+name: Redis Secure Connection Test
+
+on: [push]
+
+jobs:
+  test-redis-connection:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Redis client
+      run: sudo apt-get install redis-tools
+
+    - name: Test Redis connection
+      env:
+        REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+        REDIS_HOST: ${{ secrets.REDIS_HOST }}
+        REDIS_PORT: ${{ secrets.REDIS_PORT }}
+      run: |
+        echo "Testing Redis secure connection..."
+        # Using redis-cli to test the connection. Adjust the command as needed.
+        redis-cli -h $REDIS_HOST -p $REDIS_PORT -a $REDIS_PASSWORD PING

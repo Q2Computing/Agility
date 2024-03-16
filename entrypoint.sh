@@ -1,4 +1,6 @@
 #!/bin/sh -l
-
-pip install -r requirements.txt
+try:
+  pip install -r requirements.txt
+except error as e:
+  echo e
 python transformer.py
